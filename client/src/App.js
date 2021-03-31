@@ -6,6 +6,8 @@ import {
 } from 'react-router-dom';
 
 import withContext from './Context';
+import PrivateRoute from './PrivateRoute';
+
 import Header from './components/Header';
 import Public from './components/Public';
 import NotFound from './components/NotFound';
@@ -17,6 +19,8 @@ import Authenticated from './components/Authenticated';
 const UserSignUpWithContext = withContext(UserSignUp);
 const UserSignInWithContext = withContext(UserSignIn);
 const HeaderWithContext = withContext(Header);
+const AuthWithContext = withContext(Authenticated);
+
 export default () => (
   <Router>
     <div>
@@ -24,7 +28,7 @@ export default () => (
 
       <Switch>
         <Route exact path="/" component={Public} />
-        <Route path="/authenticated" component={Authenticated} />
+        <PrivateRoute path="/authenticated" component={AuthWithContext} />
         <Route path="/signin" component={UserSignInWithContext} />
         <Route path="/signup" component={UserSignUpWithContext} />
         <Route path="/signout" component={UserSignOut} />
