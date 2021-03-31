@@ -91,6 +91,11 @@ export default class UserSignUp extends Component {
           this.setState({errors});
         } else {
           console.log(`${username} is successfully signed up and authenticated`);
+          this.setState({
+            name: '',
+            username: '',
+            password: ''
+          });
         }
       })
       .catch(err => {
