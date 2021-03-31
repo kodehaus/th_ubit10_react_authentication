@@ -59,6 +59,16 @@ export default class UserSignUp extends Component {
       </div>
     );
   }
+  clearForm = () => {
+    this.setState(() => {
+      return {
+        name: '',
+        username: '',
+        password: '',
+        errors:[]
+      }
+    });
+  }
 
   change = (event) => {
     const name = event.target.name;
@@ -90,13 +100,14 @@ export default class UserSignUp extends Component {
         if(errors.length) {
           this.setState({errors});
         } else {
-          console.log(`${username} is successfully signed up and authenticated`);
-          this.setState({
-            name: '',
-            username: '',
-            password: '',
-            errors:[]
-          });
+          context.actions.signIn(username, password)
+            .then(() => {
+              this.props.history.push('/authenticated'); 
+            })
+            .catch((error) => {
+
+            });
+          this.clearForm();
         }
       })
       .catch(err => {
