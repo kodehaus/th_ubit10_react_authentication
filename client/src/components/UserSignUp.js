@@ -94,7 +94,8 @@ export default class UserSignUp extends Component {
           this.setState({
             name: '',
             username: '',
-            password: ''
+            password: '',
+            errors:[]
           });
         }
       })
